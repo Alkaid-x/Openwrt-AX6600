@@ -57,8 +57,10 @@ echo "CONFIG_LUCI_LANG_zh_Hans=y" >> ./.config
 #echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
 
 #手动调整的插件
+# WRT_PACKAGE 会原样拼进 .config，非 CONFIG_ 开头的行（说明文字等）会让 make 报
+# "missing separator" 直接终止构建，这里只保留合法的配置行。
 if [ -n "$WRT_PACKAGE" ]; then
-	echo -e "$WRT_PACKAGE" >> ./.config
+	printf '%s\n' "$WRT_PACKAGE" | grep -E '^CONFIG_[A-Za-z0-9_]+=' >> ./.config || true
 fi
 
 #高通平台调整
