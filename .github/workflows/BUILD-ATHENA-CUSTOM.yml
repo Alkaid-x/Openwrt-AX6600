@@ -15,9 +15,6 @@ on:
         default: false
         required: true
 
-permissions:
-  contents: read
-
 jobs:
   athena:
     uses: ./.github/workflows/WRT-CORE.yml
@@ -34,3 +31,4 @@ jobs:
       WRT_SOURCE: ones20250/immortalwrt_ipq
       WRT_PROFILE: ${{ inputs.profile }}
       WRT_TEST: ${{ inputs.config_only && 'true' || 'false' }}
+
