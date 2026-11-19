@@ -1,0 +1,36 @@
+name: Build Athena custom firmware
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: Build profile
+        type: choice
+        options: [PLUS]
+        default: PLUS
+        required: true
+      config_only:
+        description: Validate only; false performs a full firmware build
+        type: boolean
+        default: false
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  athena:
+    uses: ./.github/workflows/WRT-CORE.yml
+    with:
+      WRT_CONFIG: IPQ60XX-WIFI-YES
+      WRT_THEME: bootstrap
+      WRT_NAME: ATHENA
+      WRT_SSID: ATHENA
+      WRT_WORD: '12345678'
+      WRT_IP: 192.168.10.1
+      WRT_PW: 无
+      WRT_REPO: https://github.com/ones20250/immortalwrt_ipq.git
+      WRT_BRANCH: owrt
+      WRT_SOURCE: ones20250/immortalwrt_ipq
+      WRT_PROFILE: ${{ inputs.profile }}
+      WRT_TEST: ${{ inputs.config_only && 'true' || 'false' }}

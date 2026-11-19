@@ -52,11 +52,20 @@ UPDATE_PACKAGE() {
 # UPDATE_PACKAGE "open-app-filter" "destan19/OpenAppFilter" "master" "" "luci-app-appfilter oaf" 这样会把原有的open-app-filter，luci-app-appfilter，oaf相关组件删除，不会出现coremark错误。
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
-#UPDATE_PACKAGE "aurora" "ones20250/luci-theme-aurora" "master"
-#UPDATE_PACKAGE "aurora-config" "ones20250/luci-app-aurora-config" "master"
-#UPDATE_PACKAGE "kucat" "sirpdboy/luci-theme-kucat" "master"
-#UPDATE_PACKAGE "kucat-config" "sirpdboy/luci-app-kucat-config" "master"
+# 用户定制主题（默认 LuCI 主题仍为 Bootstrap，可在界面中选择）
+UPDATE_PACKAGE "luci-theme-vantage" "anothaDev/luci-theme-vantage" "main"
+UPDATE_PACKAGE "luci-theme-7dollar" "itsmaiGe/luci-theme-7dollar" "main"
+UPDATE_PACKAGE "luci-theme-carbon" "mrjoechen/luci-theme-carbon" "main"
+
+# dae / daed / honk / Nikki OpenWrt packages
+# daeuniverse/openwrt-packages 包含 dae、honk、luci-app-honk 等独立包目录
+UPDATE_PACKAGE "daeuniverse-openwrt-packages" "daeuniverse/openwrt-packages" "main" "pkg"
+# daed 上游包含 daed 与 luci-app-daed 目录，提取整个仓库 package
+UPDATE_PACKAGE "luci-app-daed" "QiuSimons/luci-app-daed" "kix" "pkg"
+# Nikki 仓库含 nikki、luci-app-nikki 与 mihomo 子包；逐项分别取出
+UPDATE_PACKAGE "OpenWrt-nikki" "nikkinikki-org/OpenWrt-nikki" "main" "pkg"
+
+# Open-Box 官方仓库通过发行包/安装器分发，不是可复用的 OpenWrt feed 包；不将安装脚本当源码编译。
 
 #UPDATE_PACKAGE "homeproxy" "ones20250/homeproxy" "master"
 #UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
